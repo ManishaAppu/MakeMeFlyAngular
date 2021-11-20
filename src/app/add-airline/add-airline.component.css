@@ -1,0 +1,13 @@
+.alignPadding {
+  padding: 0px;
+}
+.modal-footer {
+  margin-top: 1rem;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

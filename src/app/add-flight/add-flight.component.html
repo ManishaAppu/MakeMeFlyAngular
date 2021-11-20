@@ -1,0 +1,68 @@
+<app-admin-header></app-admin-header>
+<form [formGroup] ='addFlightForm' (ngSubmit)="addFlight()">
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Flight Name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="flightName" formControlName="flightName">
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Airline Name</label>
+        <div class="col-sm-4">
+         <input type="text" class="form-control" id="airlineName" list="airlineList" formControlName="airlineName">
+            <datalist id="airlineList">
+            <span *ngFor = "let airline of airlineList">
+                <option id='{{airline.airlineId}}'>{{airline.airlineName}}</option>
+        </span>
+    </datalist>
+        </div>
+      </div>
+      <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Business Seat</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="businessSeats" formControlName="businessSeats">
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Non Business Seat</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="nonBusinessSeats" formControlName="nonBusinessSeats">
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Business Seat Cost</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="businessSeatCost" formControlName="businessSeatCost">
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Non Business Seat Cost</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="nonBusinessSeatCost" formControlName="nonBusinessSeatCost">
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Meal Preference</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="vegMealPreference" list="mealType" formControlName="mealType">
+            <datalist id="mealType">
+                <span *ngFor='let meal of mealList'>
+                    <option>{{meal.mealType}}</option>
+                </span>
+            </datalist>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Add Flight</button>
+      </div>
+    </div>
+  </form>

@@ -1,0 +1,23 @@
+<app-admin-header></app-admin-header>
+<a routerLink="/addAirline"><button type="button" class="btn btn-primary">Add Airline</button></a>
+
+<div class="card">
+   <div class="table-responsive">
+        <table class="table" *ngIf='airlineList.length'>
+            <thead>
+                <tr>
+                    <th>Airline Id</th>
+                    <th>Airline Name</th>
+                    <th>IAIA Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor ='let airline of airlineList'>
+                    <td>{{airline.airlineId}}</td>
+                    <td>{{airline.airlineName }}</td>
+                    <td>{{airline.iaia}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

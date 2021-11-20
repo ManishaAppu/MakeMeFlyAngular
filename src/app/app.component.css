@@ -1,0 +1,15 @@
+.head {
+  font-size: 30px;
+  color: chocolate;
+  margin: auto;
+  width: 14%;
+  background-color: cyan;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+}

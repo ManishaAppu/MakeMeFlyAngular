@@ -1,0 +1,23 @@
+<app-admin-header></app-admin-header>
+<form [formGroup]="airlineForm" (ngSubmit)="addAirline()">
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Airline Name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="airlineName" formControlName="airlineName">
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">IAIA Code</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="iaia" formControlName="iaia">
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Add Airline</button>
+      </div>
+    </div>
+  </form>

@@ -1,0 +1,34 @@
+<app-admin-header></app-admin-header>
+<a routerLink="/addFlight"><button type="button" class="btn btn-primary">Add Flight</button></a>
+
+
+
+<div class="card">
+    <div class="table-responsive">
+         <table class="table" *ngIf='flightList.length'>
+             <thead>
+                 <tr>
+                     <th>Flight Id</th>
+                     <th>Flight Name</th>
+                     <th>Business Seats Count</th>
+                     <th>Non Business Seats Count</th>
+                     <th>Airline Name</th>
+                     <th>Meal Preference</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr *ngFor ='let flight of flightList'>
+                     <td>{{flight.flightId}}</td>
+                     <td>{{flight.flightName }}</td>
+                     <td>{{flight.businessSeats}}</td>
+                     <td>{{flight.nonBusinessSeats}}</td>
+                     <td>{{flight.airline.airlineName}}</td>
+                     <td>{{flight.meals[0].mealType}}  
+                         <span *ngIf="flight.meals[1] != null"> / {{flight.meals[1].mealType}} </span>
+                     </td>
+                 </tr>
+             </tbody>
+         </table>
+     </div>
+ </div>
+ 

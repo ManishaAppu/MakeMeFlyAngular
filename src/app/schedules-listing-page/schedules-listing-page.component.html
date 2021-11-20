@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="table-responsive">
+         <table class="table" *ngIf='scheduledList.length'>
+             <thead>
+                 <tr>
+                     <th>Flight Schedule Id</th>
+                     <th>Flight Id</th>
+                     <th>Flight Name</th>
+                     <th>Departure Time</th>
+                     <th>Arrival Time</th>
+                     <th>Schedule Start Date</th>
+                     <th>Schedule End Date</th>
+                     <th>Departure Place</th>
+                     <th>Arrival Place</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr *ngFor ='let schedule of scheduledList'>
+                     <td>{{schedule.flightScheduleId}}</td>
+                     <td>{{schedule.flight.flightId}}</td>
+                     <td>{{schedule.flight.flightName}}</td>
+                     <td>{{schedule.departureTime}}</td>
+                     <td>{{schedule.arrivalTime}}</td>
+                     <td>{{schedule.scheduledStartDate}}</td>
+                     <td>{{schedule.scheduledEndDate}} 
+                     <td>{{schedule.departurePlaceId.cityName}}</td>
+                     <td>{{schedule.destinationPlaceId.cityName}}</td>
+                 </tr>
+             </tbody>
+         </table>
+     </div>
+ </div>
+ 
