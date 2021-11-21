@@ -1,67 +1,60 @@
 <app-admin-header></app-admin-header>
-<form>
+<form [formGroup]="flightScheduleForm" (ngSubmit)="scheduleFlight()">
+  <br>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Fight Name</label>
+    <div class="col-sm-4">
+      <select id="flightList" formControlName="flightId" class="form-control">
+             <option *ngFor = "let flight of flightNameList" [ngValue]='flight.flightId'>{{flight.flightName}}</option>
+        </select>
+    </div>
+  </div>
+  
     <br>
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Dispature Time</label>
       <div class="col-sm-4">
-        <input type="datetime-local" class="form-control" id="dispatureTime">
+        <input type="datetime-local" class="form-control" id="dispatureTime" formControlName='departureTime'>
       </div>
     </div>
     <br>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Arrival Time</label>
         <div class="col-sm-4">
-          <input type="datetime-local" class="form-control" id="arrivalTime">
+          <input type="datetime-local" class="form-control" id="arrivalTime" formControlName="arrivalTime">
         </div>
       </div>
     <br>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Schedule Start Date</label>
         <div class="col-sm-4">
-          <input type="date" class="form-control" id="arrivalTime">
+          <input type="datetime-local" class="form-control" id="scheduledStartDate" formControlName="scheduledStartDate">
         </div>
       </div>
     <br>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Schedule End Date</label>
         <div class="col-sm-4">
-          <input type="date" class="form-control" id="arrivalTime">
+          <input type="datetime-local" class="form-control" id="scheduledEndDate" formControlName="scheduledEndDate">
         </div>
       </div>
     <br>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Fight Name</label>
-      <div class="col-sm-4">
-        <input class="form-control" id="flightName" List="flightList">
-        <datalist id="flightList">
-            <span *ngFor = "let flight of flightNameList">
-                <option>{{flight.flightName}}</option>
-        </span>
-    </datalist>
-      </div>
-    </div>
-    <br>
+   
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Dispature Place</label>
         <div class="col-sm-4">
-          <input class="form-control" id="departurePlace" List="cityList">
-          <datalist id="cityList">
-            <span *ngFor = "let city of cityList">
-                <option>{{city.cityName}}</option>
-        </span>
-    </datalist>
+          <select class="form-control" id="cityList" formControlName="departurePlaceId">
+                <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
+          </select>
         </div>
       </div>
       <br>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Arrival Place</label>
         <div class="col-sm-4">
-          <input class="form-control" id="arrivalPlace" List="cityList">
-          <datalist id="cityList">
-            <span *ngFor = "let city of cityList">
-                <option>{{city.cityName}}</option>
-        </span>
-    </datalist>
+          <select class="form-control" id="cityList" formControlName="destinationPlaceId">
+                <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
+         </select>
         </div>
       </div>
       <br>

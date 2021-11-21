@@ -11,7 +11,6 @@ import { AuthService } from '../auth.service';
 export class LoginComponentComponent implements OnInit {
   loginForm! :FormGroup;
 
-
   constructor(private authService : AuthService, private router: Router) {
     
   }
@@ -44,18 +43,23 @@ export class LoginComponentComponent implements OnInit {
 
   loginProcess(){
     console.log("Login Form ");
-    // let ex:String = this.loginForm.controls['username'].value;
-    // console.log(ex);
-    // this.loginForm.controls['username'].setValue("MAnishsa");
 
     if(this.loginForm.valid){
       this.authService.login(this.loginForm.value).subscribe(result =>{ 
-        console.log("Inside Subscribe");
+          if(result.token){
+           this.authService.setToken(result.token);
+          //  console.log("Logged In >>> ");
+          //  this.router.navigate(['home']);
+           let jwtData = result.token.split('.')[1];
+           let decodedJwtJsonData = JSON.parse(window.atob(jwtData));
+           // console.log('jwtData: ' + decodedJwtJsonData.role);
+           if(decodedJwtJsonData.role=="user"){
+             this.router.navigate(['user/home']);
+           }
+           else if(decodedJwtJsonData.role=="admin"){
+             this.router.navigate(['home']);
+           }
 
-        if(result.token){
-          this.authService.setToken(result.token);
-           console.log("Logged In >>> ");
-           this.router.navigate(['home']);
         }
         else{
           console.log("Logged in failed");

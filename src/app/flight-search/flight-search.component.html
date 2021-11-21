@@ -1,0 +1,22 @@
+<form class="row g-3" [formGroup]="flightSearchForm" (ngSubmit)="seachFlight()">
+    <div class="col-4">
+      <label for="travelDate" class="form-label">Travel Date</label>
+      <input type="datetime-local" class="form-control" id="travelDate" formControlName="travelDate">
+    </div>
+        <div class="col-4">
+        <label  class="form-label">Departure Place</label>
+          <select class="form-control" id="cityList" formControlName="departurePlaceId">
+                <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
+          </select>
+      </div>
+      <div class="col-4">
+        <label class="form-label">Destination Place</label>
+          <select class="form-control" id="cityList" formControlName="destinationPlaceId">
+                <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
+          </select>
+      </div>
+      <br>
+    <div class="col-4">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>

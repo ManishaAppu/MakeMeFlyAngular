@@ -18,6 +18,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
+import { FlightSearchComponent } from './flight-search/flight-search.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
     SchedulesListingPageComponent,
     UserHeaderComponent,
     AdminHomeComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    FlightSearchComponent
   ],
   imports: [
     BrowserModule,

@@ -48,7 +48,7 @@ export class AddAirlineComponent implements OnInit {
     //   this.airline.iaiaCode = this.airlineForm.controls['iaiaCode'].value;
     // }
     this.airlineService.saveAirline(this.airlineForm.value).subscribe(result =>{
-          if(result != null && result.airlineIn != null){
+          if(result != null){
                  console.log('Airline Added successfully');
                  this.route.navigate(['airlines']);
           }

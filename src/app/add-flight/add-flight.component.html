@@ -11,12 +11,10 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Airline Name</label>
         <div class="col-sm-4">
-         <input type="text" class="form-control" id="airlineName" list="airlineList" formControlName="airlineName">
-            <datalist id="airlineList">
-            <span *ngFor = "let airline of airlineList">
-                <option id='{{airline.airlineId}}'>{{airline.airlineName}}</option>
-        </span>
-    </datalist>
+         <select formControlName="airlineId" class="form-control">
+            <option [ngValue]="null" disabled>Select Airline</option>
+            <option *ngFor="let airline of airlineList" [ngValue]="airline.airlineId">{{airline.airlineName}}</option>
+         </select>
         </div>
       </div>
       <br>
@@ -49,17 +47,16 @@
     </div>
     <br>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Meal Preference</label>
-        <div class="col-sm-4">
-          <input class="form-control" id="vegMealPreference" list="mealType" formControlName="mealType">
-            <datalist id="mealType">
-                <span *ngFor='let meal of mealList'>
-                    <option>{{meal.mealType}}</option>
-                </span>
-            </datalist>
-        </div>
+      <label class="col-sm-2 col-form-label">Meal Preference</label>
+      <div class="col-sm-4">
+       <select multiple 
+       formControlName="meals" class="form-control">
+          <option [ngValue]="null" disabled>Select Meal</option>
+          <option *ngFor="let meal of mealList" [ngValue]="meal">{{meal.mealType}}</option>
+       </select>
+      </div>
     </div>
-    <br>
+   <br>
     <div class="form-group row">
       <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">Add Flight</button>

@@ -1,8 +1,10 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Iflight } from '../models/flight.model';
 import { AirlineService } from '../services/airline.service';
+import { FlightService } from '../services/flight.service';
 import { MealtypeService } from '../services/mealtype.service';
 
 @Component({
@@ -22,7 +24,10 @@ export class AddFlightComponent implements OnInit {
 
 
   constructor(private airlineService: AirlineService,
-    private mealtypeService: MealtypeService) { }
+    private mealtypeService: MealtypeService,
+    private flightService: FlightService,
+    private route: Router,
+    private fromBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.init();
@@ -31,14 +36,14 @@ export class AddFlightComponent implements OnInit {
   }
 
   init():void{
-    this.addFlightForm = new FormGroup({
+    this.addFlightForm = this.fromBuilder.group({
       flightName: new FormControl(),
-      airlineName: new FormControl(),
+      airlineId: new FormControl(),
       businessSeats: new FormControl(),
       nonBusinessSeats: new FormControl(),
       businessSeatCost: new FormControl(),
       nonBusinessSeatCost: new FormControl(),
-      mealType: new FormControl()
+      meals: new FormControl()
     })
   }
 
@@ -66,14 +71,19 @@ export class AddFlightComponent implements OnInit {
 
   addFlight(){
     console.log(" Inside of Add Airline");
-    console.log(this.addFlightForm);
+    console.log(this.addFlightForm.value);
   
-    // this.flight.flightName = this.addFlightForm.controls['flightName'].value;
-    // this.flight.airlineId = this.addFlightForm.controls['airlineName'].;
-
-
-    console.log(" f>>>> " + this.flight);
+    this.flightService.saveFlight(this.addFlightForm.value).subscribe(result=>{
+      if(result != null){
+        console.log('Flight Added successfully');
+        this.route.navigate(['flightListing']);
+ }
+ else{
+     console.log('Flight failed  to add !!!');
+     this.route.navigate(['addFlight']);
+ }
+    })
+   
 }
-
 
 }

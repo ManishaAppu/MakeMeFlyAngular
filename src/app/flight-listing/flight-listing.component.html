@@ -23,7 +23,7 @@
                      <td>{{flight.businessSeats}}</td>
                      <td>{{flight.nonBusinessSeats}}</td>
                      <td>{{flight.airline.airlineName}}</td>
-                     <td>{{flight.meals[0].mealType}}  
+                     <td><span *ngIf="flight.meals[0] != null">  {{flight.meals[0].mealType}} </span>  
                          <span *ngIf="flight.meals[1] != null"> / {{flight.meals[1].mealType}} </span>
                      </td>
                  </tr>

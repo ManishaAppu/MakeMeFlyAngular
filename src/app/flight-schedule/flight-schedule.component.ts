@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CityService } from '../services/city.service';
+import { FlightScheduleService } from '../services/flight-schedule.service';
+import { FlightService } from '../services/flight.service';
 
 @Component({
   selector: 'app-flight-schedule',
@@ -7,166 +12,71 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightScheduleComponent implements OnInit {
 
-  cityList:any[] =[
-    {
-        "cityId": 1,
-        "cityName": "Delhi",
-        "cityCode": "DEL",
-        "isActive": 1
-    },
-    {
-        "cityId": 2,
-        "cityName": "Goa",
-        "cityCode": "GOI",
-        "isActive": 1
-    },
-    {
-        "cityId": 3,
-        "cityName": "Chennai",
-        "cityCode": "MAA",
-        "isActive": 1
-    },
-    {
-        "cityId": 4,
-        "cityName": "Coimabtore",
-        "cityCode": "CJB",
-        "isActive": 1
-    },
-    {
-        "cityId": 5,
-        "cityName": "Kochi",
-        "cityCode": "COK",
-        "isActive": 1
-    },
-    {
-        "cityId": 6,
-        "cityName": "Kolkata",
-        "cityCode": "CCU",
-        "isActive": 1
-    },
-    {
-        "cityId": 7,
-        "cityName": "Bangalore",
-        "cityCode": "BLR",
-        "isActive": 1
-    },
-    {
-        "cityId": 8,
-        "cityName": "Hydrabad",
-        "cityCode": "HYD",
-        "isActive": 1
-    },
-    {
-        "cityId": 9,
-        "cityName": "Calicut",
-        "cityCode": "CCJ",
-        "isActive": 1
-    }
-];
+  constructor(private cityService: CityService, 
+              private flightService: FlightService,
+              private flightScheduleService: FlightScheduleService,
+              private route : Router
+    ){}
+  cityList:any[] =[];
+  flightNameList!:any[];
 
-
-flightNameList:any[] = [
-  {
-      "flightId": 3,
-      "flightName": "Deccan CS1",
-      "businessSeats": 20,
-      "nonBusinessSeats": 15,
-      "businessSeatCost": 9000.0,
-      "nonBusinessSeatCost": 3000.0,
-      "isActive": 1,
-      "airline": {
-          "airlineId": 2,
-          "airlineName": "Decaan",
-          "iaia": "DC",
-          "isActive": 0
-      },
-      "meals": [
-          {
-              "mealId": 1,
-              "mealType": "veg"
-          },
-          {
-              "mealId": 2,
-              "mealType": "Non-veg"
-          }
-      ],
-      "flightSeats": [
-          {
-              "flightSeatId": 1,
-              "flightSeatNumber": "B1",
-              "isBusinessSeat": 1
-          }
-      ]
-  },
-  {
-      "flightId": 4,
-      "flightName": "Deccan CS1",
-      "businessSeats": 20,
-      "nonBusinessSeats": 15,
-      "businessSeatCost": 9000.0,
-      "nonBusinessSeatCost": 3000.0,
-      "isActive": 1,
-      "airline": {
-          "airlineId": 1,
-          "airlineName": "Decaan_TC",
-          "iaia": "DC_TC",
-          "isActive": 0
-      },
-      "meals": [
-          {
-              "mealId": 1,
-              "mealType": "veg"
-          },
-          {
-              "mealId": 2,
-              "mealType": "Non-veg"
-          }
-      ],
-      "flightSeats": [
-          {
-              "flightSeatId": 36,
-              "flightSeatNumber": "B1",
-              "isBusinessSeat": 1
-          }
-      ]
-  },
-  {
-      "flightId": 5,
-      "flightName": "Indigo CS1",
-      "businessSeats": 20,
-      "nonBusinessSeats": 15,
-      "businessSeatCost": 9000.0,
-      "nonBusinessSeatCost": 3000.0,
-      "isActive": 1,
-      "airline": {
-          "airlineId": 6,
-          "airlineName": "Indigo",
-          "iaia": "IC",
-          "isActive": 1
-      },
-      "meals": [
-          {
-              "mealId": 1,
-              "mealType": "veg"
-          },
-          {
-              "mealId": 2,
-              "mealType": "Non-veg"
-          }
-      ],
-      "flightSeats": [
-          {
-              "flightSeatId": 71,
-              "flightSeatNumber": "B1",
-              "isBusinessSeat": 1
-          }
-      ]
-  }
-];
-
-  constructor() { }
+  flightScheduleForm!: FormGroup;
 
   ngOnInit(): void {
+    this.init();
+    this.getAllCities();
+    this.getFlightSchedules();
+  }
+
+  init(){
+       this.flightScheduleForm = new FormGroup({
+            flightId : new FormControl(),
+           departureTime: new FormControl(),
+           arrivalTime: new FormControl(),
+           scheduledStartDate: new FormControl(),
+           scheduledEndDate: new FormControl(),
+           departurePlaceId: new FormControl(),
+           destinationPlaceId: new FormControl(),
+           scheduleDaysId: new FormControl(1)
+       })
+  }
+
+
+  getAllCities(){
+    this.cityService.getAllCity().subscribe(result =>{
+        if(result != null){
+          console.log(result);
+          this.cityList = result;
+        }else{
+          console.log(" No Cities Found");
+        }
+      });
+  }
+
+  getFlightSchedules(){
+    this.flightService.getAllFlight().subscribe(result =>{
+        if(result != null){
+          console.log(result);
+           this.flightNameList = result;
+        }else{
+          console.log(" No Flights Found");
+        }
+      });
+  }
+
+  scheduleFlight(){
+      console.log(this.flightScheduleForm.value);
+      this.flightScheduleService.scheduleFlight(this.flightScheduleForm.value).subscribe(result=>{
+        if(result != null){
+          console.log('Flight Scheduled successfully');
+          this.route.navigate(['flightSchedule']);
+   }
+   else{
+       console.log('Flight failed  to Scheduled !!!');
+       this.route.navigate(['flightSchedule']);
+   }
+      }) 
+
   }
 
 }
