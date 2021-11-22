@@ -1,22 +1,79 @@
-<form class="row g-3" [formGroup]="flightSearchForm" (ngSubmit)="seachFlight()">
-    <div class="col-4">
+<form class="row" [formGroup]="flightSearchForm" (ngSubmit)="seachFlight()">
+  <div class="col-4">
+    <div class="form-group">
       <label for="travelDate" class="form-label">Travel Date</label>
-      <input type="datetime-local" class="form-control" id="travelDate" formControlName="travelDate">
+          <input type="datetime-local" class="form-control" id="travelDate" formControlName="travelDate">
     </div>
-        <div class="col-4">
-        <label  class="form-label">Departure Place</label>
+    </div>
+    <div class="col-4">  
+    <div class="form-group">
+       <label  class="form-label">Departure Place</label>
           <select class="form-control" id="cityList" formControlName="departurePlaceId">
                 <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
           </select>
       </div>
-      <div class="col-4">
-        <label class="form-label">Destination Place</label>
-          <select class="form-control" id="cityList" formControlName="destinationPlaceId">
-                <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
-          </select>
-      </div>
-      <br>
-    <div class="col-4">
+    </div>
+
+    <div class="col-4">  
+    <div class="form-group">
+      <label  class="form-label">Destination Place</label>
+         <select class="form-control" id="cityList" formControlName="destinationPlaceId">
+               <option *ngFor = "let city of cityList" [ngValue] ="city.cityId">{{city.cityName}}</option>
+         </select>
+     </div>
+   </div>
+     
+    <div class="col-4 mt-2">
+    <div class="form-group">
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
+    </div>
   </form>
+
+
+  
+<div class="card">
+  <div class="table-responsive">
+       <table class="table" *ngIf='availableFlights.length'>
+           <thead>
+               <tr>
+                   <th>Flight Name</th>
+                   <th>Departure Place</th>
+                   <th>Destination Place</th>
+                   <th>Departure Time</th>
+                   <th>Arrival Time</th>
+                   <th>Business Seat Cost</th>
+                   <th>Non Business Seat Cost</th>
+               </tr>
+           </thead>
+           <!--
+arrivalPlace: "Kochi"
+arrivalTime: "2021-11-20T07:00:00"
+businessSeatCost: 9000
+departurePlace: "Coimabtore"
+departurePlaceId: 4
+departureTime: "2021-11-20T10:00:00"
+destinationPlaceId: 5
+flightId: 3
+flightName: "Deccan CS1"
+flightScheduleId: 2
+nonBusinessSeatCost: 3000
+
+            --> <tbody>
+               <tr *ngFor ='let flight of availableFlights'>
+                   <td>{{flight.flightName}}</td>
+                   <td>{{flight.departurePlace }}</td>
+                   <td>{{flight.arrivalPlace}}</td>
+                   <td>{{flight.departureTime | date:'shortTime' }}  </td>
+                   <td>{{flight.arrivalTime | date:'shortTime' }}</td>
+                   <td>{{flight.businessSeatCost }}</td>
+                   <td>{{flight.nonBusinessSeatCost}}</td>
+                   <td> <button type="button" class="btn btn-primary" (click)="bookTicket(flight.flightScheduleId)" >Book Ticket</button></td>
+                   <div *ngIf="showChildComponent">
+                          <app-book-ticket [flightScheduleId]= "flight.flightScheduleId"></app-book-ticket>                   
+                    </div>       
+                  </tr>
+             </tbody> 
+       </table>
+   </div>
+</div>

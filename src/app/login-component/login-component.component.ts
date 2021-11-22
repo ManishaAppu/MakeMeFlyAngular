@@ -52,9 +52,9 @@ export class LoginComponentComponent implements OnInit {
           //  this.router.navigate(['home']);
            let jwtData = result.token.split('.')[1];
            let decodedJwtJsonData = JSON.parse(window.atob(jwtData));
-           // console.log('jwtData: ' + decodedJwtJsonData.role);
+            console.log('jwtData: ' + decodedJwtJsonData.role);
            if(decodedJwtJsonData.role=="user"){
-             this.router.navigate(['user/home']);
+             this.router.navigate(['user']);
            }
            else if(decodedJwtJsonData.role=="admin"){
              this.router.navigate(['home']);

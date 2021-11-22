@@ -27,4 +27,37 @@ export class FlightService {
       })
     })
   }
+
+  getFlightSeats(flightScheduleId: number): Observable<any> {
+    return this.http.get(`${baseUrl}v1/getFlightSeats/${flightScheduleId}`, { 
+      headers : new HttpHeaders({
+        'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+
+  getFlightById(data: number): Observable<any> {
+    return this.http.get(`${baseUrl}v1/getAllFlight/${data}`, { 
+      headers : new HttpHeaders({
+        'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+
+  blockFlight(data:any): Observable<any>{
+    return this.http.put(`${baseUrl}v1/blockFlight/${data}`,{ }, {
+      headers: new HttpHeaders({
+            'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+  
+  unBlockFlight(data:any): Observable<any>{
+    return this.http.put(`${baseUrl}v1/unBlockAirline/${data}`,{ }, {
+      headers: new HttpHeaders({
+            'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+
 }

@@ -27,4 +27,31 @@ getAllAirline(): Observable<any>{
   })
 }
 
+blockAirline(data:any): Observable<any>{
+  return this.http.put(`${baseUrl}v1/blockAirline/${data}`,{ }, {
+    headers: new HttpHeaders({
+          'token': 'Bearer '+ this.auth.getToken()
+    })
+  })
+}
+
+unBlockAirline(data:any): Observable<any>{
+  return this.http.put(`${baseUrl}v1/unBlockAirline/${data}`,{ }, {
+    headers: new HttpHeaders({
+          'token': 'Bearer '+ this.auth.getToken()
+    })
+  })
+}
+
+//getAirline
+
+getAirlineById(data: number): Observable<any> {
+  return this.http.get(`${baseUrl}v1/getAirline/${data}`, { 
+    headers : new HttpHeaders({
+      'token': 'Bearer '+ this.auth.getToken()
+    })
+  })
+}
+
+
 }

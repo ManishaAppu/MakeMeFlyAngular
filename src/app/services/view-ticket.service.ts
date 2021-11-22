@@ -7,12 +7,20 @@ import { AuthService } from '../auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class FlightSearchService {
+export class ViewTicketService {
 
   constructor(private http: HttpClient, private auth: AuthService ) { }
 
-  searchFlight(data:any): Observable<any>{
-    return this.http.post(`${baseUrl}v1/searchFlight`,data ,{ 
+  searchFlight(ticketId: number): Observable<any> {
+    return this.http.get(`${baseUrl}v1/getTicket/${ticketId}`, { 
+      headers : new HttpHeaders({
+        'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+
+  cancelTicket(ticketId: number){
+    return this.http.get(`${baseUrl}v1/cancelTicket/${ticketId}`, { 
       headers : new HttpHeaders({
         'token': 'Bearer '+ this.auth.getToken()
       })

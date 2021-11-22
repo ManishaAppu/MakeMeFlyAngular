@@ -43,10 +43,6 @@ export class AddAirlineComponent implements OnInit {
 
 
   addAirline(){
-    // if(this.airlineForm.controls['airlineName'].value != null && this.airlineForm.controls['airlineName'].value != undefined){
-    //   this.airline.airlineName = this.airlineForm.controls['airlineName'].value;
-    //   this.airline.iaiaCode = this.airlineForm.controls['iaiaCode'].value;
-    // }
     this.airlineService.saveAirline(this.airlineForm.value).subscribe(result =>{
           if(result != null){
                  console.log('Airline Added successfully');

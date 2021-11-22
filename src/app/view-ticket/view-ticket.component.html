@@ -1,0 +1,62 @@
+<app-user-header></app-user-header>
+<form class="row" [formGroup]="viewFormGroup" (ngSubmit)="searchTicket()">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="ticketId" class="form-label">Ticket Id</label>
+            <input type="text" class="form-control" id="ticketId" formControlName="ticketId">
+      </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+ 
+<div class="card">
+    <div class="table-responsive">
+         <table class="table" *ngIf='ticketResult'>
+             <thead>
+                 <tr>
+                     <th>Ticket Id</th>
+                     <th>Travel Date</th>
+                     <th>PNR No</th>
+                     <th>Total Cost</th>
+                     <th>Departure Time</th>
+                     <th>Arrival Time</th>
+                     <th>Departure Place</th>
+                     <th>Arrival Place</th>
+                     <th>User</th>
+                 </tr>
+             </thead>
+             <!--
+  arrivalPlace: "Kochi"
+  arrivalTime: "2021-11-20T07:00:00"
+  businessSeatCost: 9000
+  departurePlace: "Coimabtore"
+  departurePlaceId: 4
+  departureTime: "2021-11-20T10:00:00"
+  destinationPlaceId: 5
+  flightId: 3
+  flightName: "Deccan CS1"
+  flightScheduleId: 2
+  nonBusinessSeatCost: 3000
+  
+              --> <tbody>
+                 <tr>
+                     <td>{{ticketResult.ticketBookingId}}</td>
+                     <td>{{ticketResult.travelDate }}</td>
+                     <td>{{ticketResult.pnrNo}}</td>
+                     <td>{{ticketResult.ticketCost }}  </td>
+                     <td>{{ticketResult.bookingFlight.departureTime | date:'shortTime' }}</td>
+                     <td>{{ticketResult.bookingFlight.arrivalTime | date:'shortTime' }}</td>
+                     <td>{{ticketResult.bookingFlight.departurePlaceId.cityName }}</td>
+                     <td>{{ticketResult.bookingFlight.destinationPlaceId.cityName}}</td>
+                     <td>{{ticketResult.user.userEmail}}</td>
+                     <td> <button type="button" class="btn btn-primary" (click)="cancelTicket(ticketResult.ticketBookingId)" >Cancel Ticket</button></td>
+                    </tr>
+               </tbody> 
+         </table>
+     </div>
+  </div>
+  

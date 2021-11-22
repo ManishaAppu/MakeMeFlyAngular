@@ -19,6 +19,9 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { FlightSearchComponent } from './flight-search/flight-search.component';
+import { BookTicketComponent } from './book-ticket/book-ticket.component';
+import { ViewTicketComponent } from './view-ticket/view-ticket.component';
+import { UpdateAirlineComponent } from './update-airline/update-airline.component';
 
 
 const routes: Routes = [
@@ -33,9 +36,10 @@ const routes: Routes = [
   { path:'flightSchedule', canActivate:[AuthGuard], component: FlightScheduleComponent},
   { path:'admin', canActivate:[AuthGuard], component: AdminHomeComponent},
 
-  { path:'user/home', component: UserHomeComponent}
-
-  
+  { path:'user', component: UserHomeComponent},
+  { path:'bookTicket', component: BookTicketComponent},
+  { path:'viewTicket', component: ViewTicketComponent},
+  { path:'updateAirline/:airlineId', component: UpdateAirlineComponent }
 
 ]
 @NgModule({
@@ -52,7 +56,10 @@ const routes: Routes = [
     UserHeaderComponent,
     AdminHomeComponent,
     UserHomeComponent,
-    FlightSearchComponent
+    FlightSearchComponent,
+    BookTicketComponent,
+    ViewTicketComponent,
+    UpdateAirlineComponent
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,11 @@ export class FlightSearchComponent implements OnInit {
 
   flightSearchForm ! : FormGroup;
 
+  availableFlights : any[]= [];
+
+  showChildComponent: boolean = false;
+
+
   ngOnInit(): void {
     this.init()
     this.getAllCities();
@@ -48,13 +53,21 @@ export class FlightSearchComponent implements OnInit {
     this.flightSearchService.searchFlight(this.flightSearchForm.value).subscribe(result=>{
       if(result != null){
         console.log('Flight Scheduled successfully');
-        this.route.navigate(['flightSchedule']);
+        console.log(result);
+        this.availableFlights = result;
  }
  else{
      console.log('Flight failed  to Scheduled !!!');
-     this.route.navigate(['flightSchedule']);
+     //this.route.navigate(['flightSchedule']);
  }
     }) 
+  }
+
+  bookTicket (data:number){
+    console.log("Inside Book Ticket method " + data );
+    this.showChildComponent = true;
+    // const bookingId  = data;
+  //  this.route.navigate(['bookTicket']);
   }
 
 }

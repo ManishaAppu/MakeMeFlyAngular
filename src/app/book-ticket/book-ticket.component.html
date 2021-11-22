@@ -1,0 +1,66 @@
+<form class="row g-3" [formGroup] = "bookTicketForm" (ngSubmit)="ReserveTicket()">
+    <div class="col-md-6">
+      <label class="form-label">No Of Passengers</label>
+      <input type="number" class="form-control" id="noOfPassengers" formControlName="noOfPassengers">
+    </div>
+    <div class="col-md-6">
+      <label  class="form-label">No Of Business Seats Booking</label>
+      <input type="number" class="form-control" id="noOfBusinessSeatsBooking" formControlName="noOfBusinessSeatsBooking">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">No Of Non Business Seats Booking</label>
+      <input type="text" class="form-control" id="noOfNonBusinessSeatsBooking" formControlName= "noOfNonBusinessSeatsBooking">
+    </div>
+    <div class="col-md-6">
+      <label  class="form-label">Travel Date</label>
+      <input type="datetime-local" class="form-control" id="travelDate" formControlName="travelDate">
+    </div >
+
+      <!-- <div class="col-md-6">
+        <label class="form-label">User</label>
+        <input type="text" class="form-control" id="user" formControlName= "user">
+      </div> -->
+
+      <div formArrayName="passengerList">
+        <div class='row' *ngFor = "let n of passengerList; let i = index;" >
+        <div [formGroupName] = "i">
+
+      <div class="col-md-6">
+        <label class="form-label">Passanger Name</label>
+        <input type="text" class="form-control" id="passengerName" formControlName="passengerName">
+      </div>
+      <div class="col-md-6">
+        <label  class="form-label">Gender</label>
+        <input type="text" class="form-control" id="gender" formControlName="gender">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Flight Seat</label>
+        <select formControlName="flightSeat" class="form-control">
+          <option [ngValue]="null" disabled>Select Seats</option>
+          <option *ngFor="let seat of flightSeats" [ngValue]="seat">{{seat.flightSeatNumber}}</option>
+       </select>
+      </div>
+      <div class="col-md-6">
+        <label  class="form-label">Meal</label>
+        <select formControlName="meal" class="form-control">
+          <option [ngValue]="null" disabled>Select Meal</option>
+          <option *ngFor="let meal of mealList" [ngValue]="meal">{{meal.mealType}}</option>
+       </select>
+      </div>
+    </div>
+  </div> 
+
+  
+ 
+
+  </div>
+
+  <div class="col-12">
+    <button type="button" class="btn btn-primary" (click)= "addPassenger()">Add Passanger</button>
+  </div>
+
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Book Ticket</button>
+    </div>
+  </form>
