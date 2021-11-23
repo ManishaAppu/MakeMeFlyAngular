@@ -19,8 +19,8 @@
                      <td>{{schedule.flightScheduleId}}</td>
                      <td>{{schedule.flight.flightId}}</td>
                      <td>{{schedule.flight.flightName}}</td>
-                     <td>{{schedule.departureTime}}</td>
-                     <td>{{schedule.arrivalTime}}</td>
+                     <td>{{schedule.departureTime | date:'shortTime'}}</td>
+                     <td>{{schedule.arrivalTime | date:'shortTime'}}</td>
                      <td>{{schedule.scheduledStartDate}}</td>
                      <td>{{schedule.scheduledEndDate}} 
                      <td>{{schedule.departurePlaceId.cityName}}</td>

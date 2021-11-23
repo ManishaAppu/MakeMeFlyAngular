@@ -20,7 +20,15 @@ export class ViewTicketService {
   }
 
   cancelTicket(ticketId: number){
-    return this.http.get(`${baseUrl}v1/cancelTicket/${ticketId}`, { 
+    return this.http.put(`${baseUrl}v1/cancelTicket/${ticketId}`, { 
+      headers : new HttpHeaders({
+        'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+
+  getAllTickets(): Observable<any>{
+    return this.http.get(`${baseUrl}v1/getAllTickets/`, { 
       headers : new HttpHeaders({
         'token': 'Bearer '+ this.auth.getToken()
       })

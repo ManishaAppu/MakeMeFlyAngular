@@ -22,6 +22,10 @@ import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { BookTicketComponent } from './book-ticket/book-ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { UpdateAirlineComponent } from './update-airline/update-airline.component';
+import { UpdateFlightComponent } from './update-flight/update-flight.component';
+import { ViewAllTicketsComponent } from './view-all-tickets/view-all-tickets.component';
+import { SearchUserPipe } from './Pipes/search-user.pipe';
+import { SearchPnrPipe } from './Pipes/search-pnr.pipe';
 
 
 const routes: Routes = [
@@ -39,7 +43,11 @@ const routes: Routes = [
   { path:'user', component: UserHomeComponent},
   { path:'bookTicket', component: BookTicketComponent},
   { path:'viewTicket', component: ViewTicketComponent},
-  { path:'updateAirline/:airlineId', component: UpdateAirlineComponent }
+  { path:'updateAirline/:airlineId', component: UpdateAirlineComponent },
+  { path:'updateFlight/:flightId', component: UpdateFlightComponent },
+  { path:'viewAllTickets', component: ViewAllTicketsComponent }
+  
+  
 
 ]
 @NgModule({
@@ -59,7 +67,11 @@ const routes: Routes = [
     FlightSearchComponent,
     BookTicketComponent,
     ViewTicketComponent,
-    UpdateAirlineComponent
+    UpdateAirlineComponent,
+    UpdateFlightComponent,
+    ViewAllTicketsComponent,
+    SearchUserPipe,
+    SearchPnrPipe
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,7 @@ export class FlightService {
   }
 
   getFlightById(data: number): Observable<any> {
-    return this.http.get(`${baseUrl}v1/getAllFlight/${data}`, { 
+    return this.http.get(`${baseUrl}v1/getFlight/${data}`, { 
       headers : new HttpHeaders({
         'token': 'Bearer '+ this.auth.getToken()
       })
@@ -53,7 +53,7 @@ export class FlightService {
   }
   
   unBlockFlight(data:any): Observable<any>{
-    return this.http.put(`${baseUrl}v1/unBlockAirline/${data}`,{ }, {
+    return this.http.put(`${baseUrl}v1/unBlockFlight/${data}`,{ }, {
       headers: new HttpHeaders({
             'token': 'Bearer '+ this.auth.getToken()
       })

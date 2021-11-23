@@ -31,8 +31,8 @@ getAllFlight(){
 
 }
 
-blockFlight(airlineId: number){
-  this.flightService.blockFlight(airlineId).subscribe(() =>{
+blockFlight(flightId: number){
+  this.flightService.blockFlight(flightId).subscribe(() =>{
     console.log("Flight Blocked Successfully");
     this.reloadCurrentRoute();
   },()=>{
@@ -48,14 +48,14 @@ reloadCurrentRoute() {
     this.route.navigate([currentUrl]);
 }
 
-//   unBlockAirline(airlineId: number){
-//     this.flightService.unBlockAirline(airlineId).subscribe(() =>{
-//       console.log("Airline UnBlocked Successfully");
-//       this.reloadCurrentRoute();
-//     },()=>{
-//       console.log("Unable to Block Airline");
-//     }); 
-//   }
+  unBlockFlight(flightId: number){
+    this.flightService.unBlockFlight(flightId).subscribe(() =>{
+      console.log("Flight UnBlocked Successfully");
+      this.reloadCurrentRoute();
+    },()=>{
+      console.log("Unable to Block Flight");
+    }); 
+  }
 
 
   

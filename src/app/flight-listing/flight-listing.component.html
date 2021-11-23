@@ -28,22 +28,24 @@
                      <td>{{flight.businessSeatCost}}</td>
                      <td>{{flight.nonBusinessSeats}}</td>
                      <td>{{flight.nonBusinessSeatCost}}</td>
-                     <td>{{flight.airline.airlineName}}</td>
+                     <td>{{flight.airline.airlineName}}
+                            <div *ngIf = "flight.airline.isActive == 0" style="color:red;">Blocked</div>
+                     </td>
                      <td><span *ngIf="flight.meals[0] != null">  {{flight.meals[0].mealType}} </span>  
                          <span *ngIf="flight.meals[1] != null"> / {{flight.meals[1].mealType}} </span>
                      </td>
                      <td>
                         <div class="form-group" *ngIf="flight.isActive == 1">
-                            <button type="submit" class="btn btn-primary" (click)="blockFlight(flight.flightId)">Block</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="flight.airline.isActive == 0" (click)="blockFlight(flight.flightId)">Block</button>
                         </div>
-                        <!-- <div class="form-group" *ngIf="flight.isActive == 0">
-                            <button type="submit" class="btn btn-primary" (click)="unBlockAirline(flight.flightId)">Unblock</button>
-                        </div> -->
+                        <div class="form-group" *ngIf="flight.isActive == 0">
+                            <button type="submit" class="btn btn-primary" [disabled]="flight.airline.isActive == 0" (click)="unBlockFlight(flight.flightId)">Unblock</button>
+                        </div>
                     </td>
                     <td>
-                        <!-- <div class="form-group">
-                            <a routerLink="/updateFlight/{{flight.flightId}}"><button type="submit" class="btn btn-primary" (click)="update(airline.airlineId)">Edit</button></a>
-                        </div> -->
+                        <div class="form-group">
+                            <a routerLink="/updateFlight/{{flight.flightId}}"><button type="submit" class="btn btn-primary">Edit</button></a>
+                        </div>
                     </td>
                  </tr>
              </tbody>
