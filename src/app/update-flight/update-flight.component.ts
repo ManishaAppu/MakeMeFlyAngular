@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AirlineService } from '../services/airline.service';
 import { FlightService } from '../services/flight.service';
@@ -13,14 +13,14 @@ import { MealtypeService } from '../services/mealtype.service';
 export class UpdateFlightComponent implements OnInit {
 
   updateFlightForm  = this.fromBuilder.group({
-    flightId: new FormControl(),
-    flightName: new FormControl(),
-    airlineId: new FormControl(),
-    businessSeats: new FormControl(),
-    nonBusinessSeats: new FormControl(),
-    businessSeatCost: new FormControl(),
-    nonBusinessSeatCost: new FormControl(),
-    meals: new FormControl()
+    flightId: new FormControl("", Validators.required),
+    flightName: new FormControl("", Validators.required),
+    airlineId: new FormControl("", Validators.required),
+    businessSeats: new FormControl("", Validators.required),
+    nonBusinessSeats: new FormControl("", Validators.required),
+    businessSeatCost: new FormControl("", Validators.required),
+    nonBusinessSeatCost: new FormControl("", Validators.required),
+    meals: new FormControl("", Validators.required)
   })
 
   airlineList:any[] =[];
@@ -28,6 +28,8 @@ export class UpdateFlightComponent implements OnInit {
   mealList:any[] =[];
 
   airlineId!: number;
+
+  userChosenMealList: any[]= [];
 
   constructor(private airlineService: AirlineService,
     private mealtypeService: MealtypeService,
@@ -58,7 +60,7 @@ export class UpdateFlightComponent implements OnInit {
             meals: new FormControl()
           })
           this.airlineId = result.airline.airlineId;
-        
+          this.userChosenMealList = result.meals;
         });
 
       
@@ -92,6 +94,9 @@ export class UpdateFlightComponent implements OnInit {
     console.log(this.updateFlightForm.value);
     this.updateFlightForm.controls['airlineId'].setValue(this.airlineId);
     console.log(this.updateFlightForm.value);
+    // if(this.updateFlightForm.controls['meals'] == null){
+    //   this.updateFlightForm.controls['meals'].setValue(this.userChosenMealList);
+    // }
 
     this.flightService.saveFlight(this.updateFlightForm.value).subscribe(result=>{
       if(result != null){

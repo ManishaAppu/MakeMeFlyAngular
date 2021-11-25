@@ -2,11 +2,11 @@
 <form class="row" [formGroup]="viewFormGroup" (ngSubmit)="searchTicket()">
     <div class="col-4">
       <div class="form-group">
-        <label for="ticketId" class="form-label">Ticket Id</label>
-            <input type="text" class="form-control" id="ticketId" formControlName="ticketId">
+        <label for="ticketId" class="form-label">User Email</label>
+            <input type="text" class="form-control" id="ticketId" formControlName="userEmail">
       </div>
     </div>
-
+<br><br>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
@@ -15,8 +15,8 @@
  
 <div class="card">
     <div class="table-responsive">
-         <table class="table" *ngIf='ticketResult'>
-             <thead>
+         <table class="table table-dark" *ngIf='TicketResultList.length > 0'>
+             <thead class="table-dark">
                  <tr>
                      <th>Ticket Id</th>
                      <th>Travel Date</th>
@@ -27,6 +27,7 @@
                      <th>Departure Place</th>
                      <th>Arrival Place</th>
                      <th>User</th>
+                     <th>Passenger Name</th>
                  </tr>
              </thead>
              <!--
@@ -43,7 +44,10 @@
   nonBusinessSeatCost: 3000
   
               --> <tbody>
-                 <tr>
+        
+
+                 
+                 <tr *ngFor ="let ticketResult of TicketResultList">
                      <td>{{ticketResult.ticketBookingId}}</td>
                      <td>{{ticketResult.travelDate }}</td>
                      <td>{{ticketResult.pnrNo}}</td>
@@ -52,10 +56,27 @@
                      <td>{{ticketResult.bookingFlight.arrivalTime | date:'shortTime' }}</td>
                      <td>{{ticketResult.bookingFlight.departurePlaceId.cityName }}</td>
                      <td>{{ticketResult.bookingFlight.destinationPlaceId.cityName}}</td>
-                     <td>{{ticketResult.user.userEmail}}</td>
-                     <td> <button type="button" class="btn btn-primary" (click)="cancelTicket(ticketResult.ticketBookingId)" >Cancel Ticket</button></td>
+                     <td>{{ticketResult.userEmail}}</td>
+                     <div *ngFor="let passenger of ticketResult.passengerList">
+                        <td>{{passenger.passengerName}}</td>
+                     </div>
+                     
+                     <td>
+                         <div *ngIf="ticketResult.isActive == 1">
+                            <button type="button" class="btn btn-primary" (click)="cancelTicket(ticketResult.ticketBookingId)" >Cancel Ticket</button>
+                         </div> 
+                         <div *ngIf="ticketResult.isActive == 0">
+                            <button type="button" class="btn btn-primary" [disabled]=true >Cancelled Ticket</button>
+                         </div> 
+                    </td>   
+                    <!-- <td>
+                        <div class="form-group">
+                            <a routerLink="/viewPassenger/{{ticketResult.ticketBookingId}}"><button type="submit" class="btn btn-primary">View Ticket</button></a>
+                        </div>
+                    </td> -->
                     </tr>
-               </tbody> 
+               
+             </tbody> 
          </table>
      </div>
   </div>

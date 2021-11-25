@@ -40,12 +40,12 @@ const routes: Routes = [
   { path:'flightSchedule', canActivate:[AuthGuard], component: FlightScheduleComponent},
   { path:'admin', canActivate:[AuthGuard], component: AdminHomeComponent},
 
-  { path:'user', component: UserHomeComponent},
-  { path:'bookTicket', component: BookTicketComponent},
-  { path:'viewTicket', component: ViewTicketComponent},
-  { path:'updateAirline/:airlineId', component: UpdateAirlineComponent },
-  { path:'updateFlight/:flightId', component: UpdateFlightComponent },
-  { path:'viewAllTickets', component: ViewAllTicketsComponent }
+  { path:'user', canActivate:[AuthGuard], component: UserHomeComponent},
+  { path:'bookTicket/:flightScheduleId', canActivate:[AuthGuard], component: BookTicketComponent},
+  { path:'viewTicket',canActivate:[AuthGuard],  component: ViewTicketComponent},
+  { path:'updateAirline/:airlineId', canActivate:[AuthGuard], component: UpdateAirlineComponent },
+  { path:'updateFlight/:flightId', canActivate:[AuthGuard], component: UpdateFlightComponent },
+  { path:'viewAllTickets', canActivate:[AuthGuard], component: ViewAllTicketsComponent }
   
   
 

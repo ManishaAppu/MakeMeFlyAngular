@@ -11,7 +11,7 @@ import { ViewTicketService } from '../services/view-ticket.service';
 export class ViewTicketComponent implements OnInit {
 
   viewFormGroup!: FormGroup;
-  ticketResult !:any;
+  TicketResultList:any[] = [];
   constructor(private route: Router,
     private viewTicketService: ViewTicketService
     ) { }
@@ -22,7 +22,7 @@ export class ViewTicketComponent implements OnInit {
 
   init(){
     this.viewFormGroup =  new FormGroup({
-      ticketId: new FormControl()
+      userEmail: new FormControl()
     })
 
   }
@@ -30,11 +30,11 @@ export class ViewTicketComponent implements OnInit {
   searchTicket(){
      console.log("Inside of Search Ticket >>>");
      console.log(this.viewFormGroup.value);
-     console.log(this.viewFormGroup.controls['ticketId'].value );
-     this.viewTicketService.searchFlight(this.viewFormGroup.controls['ticketId'].value).subscribe(result =>{
+     console.log(this.viewFormGroup.controls['userEmail'].value );
+     this.viewTicketService.searchFlight(this.viewFormGroup.value).subscribe(result =>{
       if(result != null){
         console.log(result);
-        this.ticketResult = result ;
+        this.TicketResultList = result ;
       }else{
         console.log(" No Tickets Found");
       }
@@ -44,13 +44,11 @@ export class ViewTicketComponent implements OnInit {
 
   cancelTicket(data:number){
       console.log("Inside of cancel Ticket") ;
-
-      
-
       this.viewTicketService.cancelTicket(data).subscribe(result =>{
         if(result != null){
           console.log(result);
           console.log("Ticket Cancelled");
+        this.route.navigate(['viewTicket']);
         }else{
           console.log(" No Tickets Found");
         }

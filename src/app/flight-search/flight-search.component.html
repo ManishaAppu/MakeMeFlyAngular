@@ -25,7 +25,7 @@
      
     <div class="col-4 mt-2">
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" [disabled]="flightSearchForm.invalid" class="btn btn-primary">Search</button>
     </div>
     </div>
   </form>
@@ -34,8 +34,8 @@
   
 <div class="card">
   <div class="table-responsive">
-       <table class="table" *ngIf='availableFlights.length'>
-           <thead>
+       <table class="table table-hover" *ngIf='availableFlights.length'>
+           <thead calss= "table-dark">
                <tr>
                    <th>Flight Name</th>
                    <th>Departure Place</th>
@@ -68,10 +68,13 @@ nonBusinessSeatCost: 3000
                    <td>{{flight.arrivalTime | date:'shortTime' }}</td>
                    <td>{{flight.businessSeatCost }}</td>
                    <td>{{flight.nonBusinessSeatCost}}</td>
-                   <td> <button type="button" class="btn btn-primary" (click)="bookTicket(flight.flightScheduleId)" >Book Ticket</button></td>
-                   <div *ngIf="showChildComponent">
+                   <td> 
+                     <a routerLink="/bookTicket/{{flight.flightScheduleId}}">
+                       <button type="button" class="btn btn-primary" >Book Ticket</button>
+                     </a></td>
+                   <!-- <div *ngIf="showChildComponent">
                           <app-book-ticket [flightScheduleId]= "flight.flightScheduleId"></app-book-ticket>                   
-                    </div>       
+                    </div>        -->
                   </tr>
              </tbody> 
        </table>

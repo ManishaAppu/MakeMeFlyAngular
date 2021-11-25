@@ -1,7 +1,8 @@
+<div class="w-100 p-3" style="font-size:25px;">Welcome to Make Me Fly<span style="float: right; font-size:20px;">Scheules Listing </span></div>
 <div class="card">
     <div class="table-responsive">
-         <table class="table" *ngIf='scheduledList.length'>
-             <thead>
+         <table class="table table-hover" *ngIf='scheduledList.length'>
+             <thead class="table-dark">
                  <tr>
                      <th>Flight Schedule Id</th>
                      <th>Flight Id</th>
@@ -12,6 +13,7 @@
                      <th>Schedule End Date</th>
                      <th>Departure Place</th>
                      <th>Arrival Place</th>
+                     <th>Status</th>
                  </tr>
              </thead>
              <tbody>
@@ -25,6 +27,14 @@
                      <td>{{schedule.scheduledEndDate}} 
                      <td>{{schedule.departurePlaceId.cityName}}</td>
                      <td>{{schedule.destinationPlaceId.cityName}}</td>
+                     <td>
+                        <div class="form-group" *ngIf="schedule.isActive == 1">
+                            <button type="submit" class="btn btn-primary" (click)="blockSchedule(schedule.flightScheduleId)">Block</button>
+                        </div>
+                        <div class="form-group" *ngIf="schedule.isActive == 0">
+                            <button type="submit" class="btn btn-primary" (click)="unBlockSchedule(schedule.flightScheduleId)">Unblock</button>
+                        </div>
+                    </td>
                  </tr>
              </tbody>
          </table>

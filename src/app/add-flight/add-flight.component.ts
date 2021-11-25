@@ -1,6 +1,6 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Iflight } from '../models/flight.model';
 import { AirlineService } from '../services/airline.service';
@@ -37,13 +37,13 @@ export class AddFlightComponent implements OnInit {
 
   init():void{
     this.addFlightForm = this.fromBuilder.group({
-      flightName: new FormControl(),
-      airlineId: new FormControl(),
-      businessSeats: new FormControl(),
-      nonBusinessSeats: new FormControl(),
-      businessSeatCost: new FormControl(),
-      nonBusinessSeatCost: new FormControl(),
-      meals: new FormControl()
+      flightName: new FormControl("",[Validators.required]),
+      airlineId: new FormControl("",[Validators.required]),
+      businessSeats: new FormControl("",[Validators.required]),
+      nonBusinessSeats: new FormControl("",[Validators.required]),
+      businessSeatCost: new FormControl("",[Validators.required]),
+      nonBusinessSeatCost: new FormControl("",[Validators.required]),
+      meals: new FormControl("",[Validators.required])
     })
   }
 

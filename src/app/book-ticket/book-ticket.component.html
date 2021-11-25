@@ -1,8 +1,9 @@
+<app-user-header></app-user-header>
 <form class="row g-3" [formGroup] = "bookTicketForm" (ngSubmit)="ReserveTicket()">
     <div class="col-md-6">
-      <label class="form-label">No Of Passengers</label>
-      <input type="number" class="form-control" id="noOfPassengers" formControlName="noOfPassengers">
-    </div>
+      <label class="form-label">UserName</label>
+      <input type="text" class="form-control" id="username" formControlName="userEmail">
+    </div> 
     <div class="col-md-6">
       <label  class="form-label">No Of Business Seats Booking</label>
       <input type="number" class="form-control" id="noOfBusinessSeatsBooking" formControlName="noOfBusinessSeatsBooking">
@@ -61,6 +62,6 @@
 
 
     <div class="col-12">
-      <button type="submit" class="btn btn-primary">Book Ticket</button>
+      <button type="submit" [disabled] ="bookTicketForm.invalid" class="btn btn-primary">Book Ticket</button>
     </div>
   </form>

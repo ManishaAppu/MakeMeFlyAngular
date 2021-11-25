@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CityService } from '../services/city.service';
 import { FlightScheduleService } from '../services/flight-schedule.service';
@@ -30,13 +30,13 @@ export class FlightScheduleComponent implements OnInit {
 
   init(){
        this.flightScheduleForm = new FormGroup({
-            flightId : new FormControl(),
-           departureTime: new FormControl(),
-           arrivalTime: new FormControl(),
-           scheduledStartDate: new FormControl(),
-           scheduledEndDate: new FormControl(),
-           departurePlaceId: new FormControl(),
-           destinationPlaceId: new FormControl(),
+            flightId : new FormControl("",Validators.required),
+           departureTime: new FormControl("",Validators.required),
+           arrivalTime: new FormControl("",Validators.required),
+           scheduledStartDate: new FormControl("",Validators.required),
+           scheduledEndDate: new FormControl("",Validators.required),
+           departurePlaceId: new FormControl("",Validators.required),
+           destinationPlaceId: new FormControl("",Validators.required),
            scheduleDaysId: new FormControl(1)
        })
   }
@@ -69,7 +69,7 @@ export class FlightScheduleComponent implements OnInit {
       this.flightScheduleService.scheduleFlight(this.flightScheduleForm.value).subscribe(result=>{
         if(result != null){
           console.log('Flight Scheduled successfully');
-          this.route.navigate(['flightSchedule']);
+          this.route.navigate(['home']);
    }
    else{
        console.log('Flight failed  to Scheduled !!!');

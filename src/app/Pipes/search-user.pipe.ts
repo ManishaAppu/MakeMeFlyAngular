@@ -10,8 +10,8 @@ export class SearchUserPipe implements PipeTransform {
     if(value.length === 0 || filterString == ""){
       return value;
     }
-    return value.filter(function(search: { user: { userEmail: string; }; }){
-      return search.user.userEmail.toLowerCase().indexOf(filterString.toLowerCase())> -1
+    return value.filter(function(search: { userEmail: string; }){
+      return search.userEmail.toLowerCase().indexOf(filterString.toLowerCase())> -1
     });
   }
 

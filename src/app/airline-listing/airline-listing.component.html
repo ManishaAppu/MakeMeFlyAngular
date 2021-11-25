@@ -1,10 +1,11 @@
 <app-admin-header></app-admin-header>
-<a routerLink="/addAirline"><button type="button" class="btn btn-primary">Add Airline</button></a>
-
+<div><span style="font-size:25px;">Airline Listing</span>
+<a routerLink="/addAirline" style="float:right;"><button type="button" class="btn btn-primary">Add Airline</button></a>
+</div><br>
 <div class="card">
    <div class="table-responsive">
-        <table class="table" *ngIf='airlineList.length'>
-            <thead>
+        <table class="table table-hover" *ngIf='airlineList.length'>
+            <thead class="table-dark">
                 <tr>
                     <th>Airline Id</th>
                     <th>Airline Name</th>

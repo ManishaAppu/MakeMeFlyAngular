@@ -11,8 +11,8 @@ export class ViewTicketService {
 
   constructor(private http: HttpClient, private auth: AuthService ) { }
 
-  searchFlight(ticketId: number): Observable<any> {
-    return this.http.get(`${baseUrl}v1/getTicket/${ticketId}`, { 
+  searchFlight(userEmail: any): Observable<any> {
+    return this.http.post(`${baseUrl}v1/getTicketByUserEmail`, userEmail, { 
       headers : new HttpHeaders({
         'token': 'Bearer '+ this.auth.getToken()
       })
@@ -20,7 +20,7 @@ export class ViewTicketService {
   }
 
   cancelTicket(ticketId: number){
-    return this.http.put(`${baseUrl}v1/cancelTicket/${ticketId}`, { 
+    return this.http.put(`${baseUrl}v1/cancelTicket/${ticketId}`,{}, { 
       headers : new HttpHeaders({
         'token': 'Bearer '+ this.auth.getToken()
       })
@@ -29,6 +29,14 @@ export class ViewTicketService {
 
   getAllTickets(): Observable<any>{
     return this.http.get(`${baseUrl}v1/getAllTickets/`, { 
+      headers : new HttpHeaders({
+        'token': 'Bearer '+ this.auth.getToken()
+      })
+    })
+  }
+
+  getTicketById(ticketId: any): Observable<any> {
+    return this.http.get(`${baseUrl}v1/getTicket/${ticketId}`, { 
       headers : new HttpHeaders({
         'token': 'Bearer '+ this.auth.getToken()
       })

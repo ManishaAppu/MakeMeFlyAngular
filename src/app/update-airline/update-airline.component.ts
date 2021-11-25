@@ -12,8 +12,8 @@ export class UpdateAirlineComponent implements OnInit {
 
 
   updateAirlineForm = new FormGroup({
-    airlineName: new FormControl(),
-    iaia: new FormControl()
+    airlineName: new FormControl("", Validators.required),
+    iaia: new FormControl("", [Validators.required])
   });
 
   constructor(private airlineService: AirlineService,

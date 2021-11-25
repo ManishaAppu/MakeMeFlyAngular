@@ -1,12 +1,10 @@
 <app-admin-header></app-admin-header>
-<a routerLink="/addFlight"><button type="button" class="btn btn-primary">Add Flight</button></a>
-
-
-
+<div><span style="font-size:25px;">Flight Listing</span>
+<a routerLink="/addFlight" style="float:right;"><button type="button" class="btn btn-primary">Add Flight</button></a>
 <div class="card">
     <div class="table-responsive">
-         <table class="table" *ngIf='flightList.length'>
-             <thead>
+         <table class="table table-hover" *ngIf='flightList.length'>
+             <thead class="table-dark">
                  <tr>
                      <th>Flight Id</th>
                      <th>Flight Name</th>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookFlightService } from '../services/book-flight.service';
 import { FlightService } from '../services/flight.service';
 import { MealtypeService } from '../services/mealtype.service';
@@ -14,9 +14,9 @@ import { MealtypeService } from '../services/mealtype.service';
 export class BookTicketComponent implements OnInit {
 
 
-  @Input() flightScheduleId: number | undefined;
+  // @Input() flightScheduleId: number | undefined;
 
-  showDiv = true;
+   flightScheduleId !: number ;
 
   bookTicketForm!: FormGroup;
   mealList: any[] = [];
@@ -26,11 +26,12 @@ export class BookTicketComponent implements OnInit {
     private mealtypeService: MealtypeService,
     private flightService: FlightService,
     private flightBookService: BookFlightService,
-    private route: Router) { }
+    private route: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
      this.init();
-     this.getFlightSeats(this.flightScheduleId);
+     this.getFlightSeats(this.activatedRoute.snapshot.params['flightScheduleId']);
      this.getMealType();
   }
 
@@ -41,16 +42,14 @@ export class BookTicketComponent implements OnInit {
 
   init(){
      this.bookTicketForm = this.formbuilder.group({
-      noOfPassengers: new FormControl(),
-      noOfBusinessSeatsBooking: new FormControl(),
-      noOfNonBusinessSeatsBooking: new FormControl(),
-      travelDate: new FormControl(),
+      noOfPassengers: new FormControl(" ",[Validators.required]),
+      noOfBusinessSeatsBooking: new FormControl(" ",[Validators.required]),
+      noOfNonBusinessSeatsBooking: new FormControl(" ",[Validators.required]),
+      travelDate: new FormControl(" ",[Validators.required]),
       flightSchedule: new FormGroup({
-        "flightScheduleId": new FormControl(this.flightScheduleId)
+        "flightScheduleId": new FormControl(this.activatedRoute.snapshot.params['flightScheduleId'])
       }),
-      user: new FormGroup({
-        "userId": new FormControl(3)
-      }),
+      userEmail: new FormControl(" ",[Validators.required]),
       passengerList: new FormArray([
        
       ])
@@ -62,10 +61,10 @@ addPassenger(){
 
   console.log("Inside Of add Passenger");
   const fa = new FormGroup({
-    passengerName: new FormControl('test1'),
-    gender: new FormControl("female"),
-    flightSeat: new FormControl(),
-    meal: new FormControl()
+    passengerName: new FormControl(" ",[Validators.required]),
+    gender: new FormControl(" ",[Validators.required]),
+    flightSeat: new FormControl(" ",[Validators.required]),
+    meal: new FormControl(" ",[Validators.required])
   });
   
  (<FormArray>this.bookTicketForm.get('passengerList')).push(fa);
@@ -100,10 +99,13 @@ getFlightSeats(flightScheduleId:any){
   ReserveTicket(){
      console.log("Inside of Reserve Ticket");
      console.log(this.bookTicketForm.value);
+    this.bookTicketForm.controls['noOfPassengers'].setValue(2);
+    console.log(" After No Of Passengers" + this.bookTicketForm.value);
+
      this.flightBookService.bookFlight(this.bookTicketForm.value).subscribe(result =>{
       if(result != null){
              console.log('Flight Booked successfully');
-             this.route.navigate(['user/home']);
+             this.route.navigate(['user']);
       }
       else{
           console.log('Flight Booked failed !!!');

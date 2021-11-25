@@ -60,7 +60,7 @@
       <br>
     <div class="form-group row">
       <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Schedule Flight</button>
+        <button type="submit" [disabled]="flightScheduleForm.invalid" class="btn btn-primary">Schedule Flight</button>
       </div>
     </div>
   </form>

@@ -27,5 +27,21 @@ export class FlightScheduleService {
     })
   })
 }
+
+blockSchedule(data:number): Observable<any>{
+  return this.http.put(`${baseUrl}v1/blockFlightSchedule/${data}`, {}, {
+    headers: new HttpHeaders({
+          'token': 'Bearer '+ this.auth.getToken()
+    })
+  })
+}
+
+unBlockSchedule(data:number): Observable<any>{
+  return this.http.put(`${baseUrl}v1/unBlockFlightSchedule/${data}`,{},  {
+    headers: new HttpHeaders({
+          'token': 'Bearer '+ this.auth.getToken()
+    })
+  })
+}
   
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CityService } from '../services/city.service';
 import { FlightSearchService } from '../services/flight-search.service';
@@ -31,9 +31,9 @@ export class FlightSearchComponent implements OnInit {
 
   init(){
     this.flightSearchForm = new FormGroup({
-      travelDate: new FormControl(),
-      departurePlaceId: new FormControl(),
-      destinationPlaceId: new FormControl()
+      travelDate: new FormControl("", Validators.required),
+      departurePlaceId: new FormControl("", Validators.required),
+      destinationPlaceId: new FormControl("", Validators.required)
     })
   }
 
@@ -63,11 +63,11 @@ export class FlightSearchComponent implements OnInit {
     }) 
   }
 
-  bookTicket (data:number){
-    console.log("Inside Book Ticket method " + data );
-    this.showChildComponent = true;
-    // const bookingId  = data;
-  //  this.route.navigate(['bookTicket']);
-  }
+  // bookTicket (data:number){
+  //   console.log("Inside Book Ticket method " + data );
+  //   this.showChildComponent = true;
+  //   // const bookingId  = data;
+  // //  this.route.navigate(['bookTicket']);
+  // }
 
 }
