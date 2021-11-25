@@ -15,7 +15,7 @@
  
 <div class="card">
     <div class="table-responsive">
-         <table class="table table-dark" *ngIf='TicketResultList.length > 0'>
+         <table class="table table-hover" *ngIf='TicketResultList.length > 0'>
              <thead class="table-dark">
                  <tr>
                      <th>Ticket Id</th>
@@ -28,6 +28,7 @@
                      <th>Arrival Place</th>
                      <th>User</th>
                      <th>Passenger Name</th>
+                     <th>Status</th>
                  </tr>
              </thead>
              <!--
@@ -60,8 +61,7 @@
                      <div *ngFor="let passenger of ticketResult.passengerList">
                         <td>{{passenger.passengerName}}</td>
                      </div>
-                     
-                     <td>
+                    <td>
                          <div *ngIf="ticketResult.isActive == 1">
                             <button type="button" class="btn btn-primary" (click)="cancelTicket(ticketResult.ticketBookingId)" >Cancel Ticket</button>
                          </div> 
